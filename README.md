@@ -1,8 +1,9 @@
 # OKDriveSDK_Android
-1.复制libs下所有jar包到项目libs下
-2.复制jniLibs下所有文件到项目src/main/jniLibs下
-3.复制assets下icudt46l.zip到项目assets下
-4.复制以下内容到配置文件
+- 复制libs下所有jar包到项目libs下
+- 复制jniLibs下所有文件到项目src/main/jniLibs下
+- 复制assets下icudt46l.zip到项目assets下
+- 复制以下内容到配置文件
+```java
 		<service android:name="com.okdrive.others.DriverService">
             <intent-filter android:priority="1000">
                 <action android:name="com.okdrive.others.DriverService" />
@@ -23,8 +24,10 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-5.调用样例：
-（1）手动开启行程：
+```
+- 调用样例：
+####手动开启行程：
+```java
        CheckBox cb = new CheckBox(this);
        OKDriveConfig config = new OKDriveConfig();
         config.setApp_key("请替换此处");
@@ -51,7 +54,9 @@
                 }
             }
         });
- （2）自动开启行程：
+```
+####自动开启行程：
+```java
         OKDriveConfig config = new OKDriveConfig();
         config.setApp_key("请替换此处");
         config.setAuto_drive(true);
@@ -66,3 +71,4 @@
             public void onFail(String s) {
             }
         });
+```
