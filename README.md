@@ -26,6 +26,7 @@
         </receiver>
 ```
 - 调用样例
+
 ####手动开启行程：
 ```java
        CheckBox cb = new CheckBox(this);
