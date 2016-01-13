@@ -77,4 +77,4 @@
 - 集成SDK后会在后台运行并跟踪您的驾驶行为，可能会显著增加电量消耗，因此我们建议您在夜间或非开车时间对手机充电
 
 # <a id="Examples"></a>【联系方式】
-- 有问题请致信：okdrive@okchexian.com
+- 有问题请致信：okdrive#okchexian.com（请将#替换成@）
