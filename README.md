@@ -2,6 +2,19 @@
 - 复制libs下所有jar包到项目libs下
 - 复制jniLibs下所有文件到项目src/main/jniLibs下
 - 复制assets下icudt46l.zip到项目assets下
+- 配置以下权限
+```java
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.LOCATION_HARDWARE" />
+<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+<uses-permission android:name="android.permission.BROADCAST_STICKY" />
+```
 - 复制以下内容到配置文件
 ```java
 		<service android:name="com.okdrive.others.DriverService">
