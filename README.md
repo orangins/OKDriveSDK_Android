@@ -14,6 +14,7 @@
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 - 复制以下内容到配置文件
 ```java
