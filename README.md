@@ -19,79 +19,79 @@
 ```
 - 复制以下内容到配置文件
 ```java
-		<service
-            android:name="com.okdrive.daemon.NotificationMonitor"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-            <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService"/>
-            </intent-filter>
-        </service>
-        <service android:name="com.okdrive.daemon.DaemonService"/>
-        <service android:name="com.okdrive.others.DriverService"/>
-        <service android:name="com.okdrive.others.GrayInnerService"/>
-        <service android:name="com.okdrive.others.UploadDriverDataService"/>
+<service
+    android:name="com.okdrive.daemon.NotificationMonitor"
+    android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+    <intent-filter>
+        <action android:name="android.service.notification.NotificationListenerService"/>
+    </intent-filter>
+</service>
+<service android:name="com.okdrive.daemon.DaemonService"/>
+<service android:name="com.okdrive.others.DriverService"/>
+<service android:name="com.okdrive.others.GrayInnerService"/>
+<service android:name="com.okdrive.others.UploadDriverDataService"/>
 
-        <receiver android:name="com.okdrive.others.WifiReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.okdrive.others.PhoneStatusReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.ACTION_SHUTDOWN"/>
-            </intent-filter>
-        </receiver>
+<receiver android:name="com.okdrive.others.WifiReceiver">
+    <intent-filter>
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+    </intent-filter>
+</receiver>
+<receiver android:name="com.okdrive.others.PhoneStatusReceiver">
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.ACTION_SHUTDOWN"/>
+    </intent-filter>
+</receiver>
 
-        <service android:name="com.okdrive.others.AlarmService"/>
+<service android:name="com.okdrive.others.AlarmService"/>
 
-        <receiver android:name="com.okdrive.others.AlarmReceiver"/>
+<receiver android:name="com.okdrive.others.AlarmReceiver"/>
 
-        <service android:name="com.okdrive.others.UploadAlarmService"/>
+<service android:name="com.okdrive.others.UploadAlarmService"/>
 
-        <receiver android:name="com.okdrive.others.UploadAlarmReceiver"/>
-        <receiver android:name="com.okdrive.others.PhoneReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE"/>
-            </intent-filter>
-        </receiver>
+<receiver android:name="com.okdrive.others.UploadAlarmReceiver"/>
+<receiver android:name="com.okdrive.others.PhoneReceiver">
+    <intent-filter>
+        <action android:name="android.intent.action.PHONE_STATE"/>
+    </intent-filter>
+</receiver>
 ```
 - 开启守护
 
 ####复制以下内容
 ```java
-		private static boolean isEnabled(Activity activity) {
-			String pkgName = activity.getPackageName();
-			final String flat = Settings.Secure.getString(activity.getContentResolver(), "enabled_notification_listeners");
-			if (!TextUtils.isEmpty(flat)) {
-				final String[] names = flat.split(":");
-				for (int i = 0; i < names.length; i++) {
-					final ComponentName cn = ComponentName.unflattenFromString(names[i]);
-					if (cn != null) {
-						if (TextUtils.equals(pkgName, cn.getPackageName())) {
-							return true;
-						}
-					}
+private static boolean isEnabled(Activity activity) {
+	String pkgName = activity.getPackageName();
+	final String flat = Settings.Secure.getString(activity.getContentResolver(), "enabled_notification_listeners");
+	if (!TextUtils.isEmpty(flat)) {
+		final String[] names = flat.split(":");
+		for (int i = 0; i < names.length; i++) {
+			final ComponentName cn = ComponentName.unflattenFromString(names[i]);
+			if (cn != null) {
+				if (TextUtils.equals(pkgName, cn.getPackageName())) {
+					return true;
 				}
 			}
-			return false;
 		}
+	}
+	return false;
+}
 
-		public static void checkNotify(final Activity activity) {
-			if (!isEnabled(activity) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-				new AlertDialog.Builder(activity)
-						.setMessage("是否开启通知使用权，确保行程管理正常运行，从而改善您的驾驶行为？")
-						.setTitle("通知使用权")
-						.setCancelable(true)
-						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								activity.startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
-							}
-						})
-						.setNegativeButton(android.R.string.cancel, null)
-						.create().show();
-			}
-		}
+public static void checkNotify(final Activity activity) {
+	if (!isEnabled(activity) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+		new AlertDialog.Builder(activity)
+				.setMessage("是否开启通知使用权，确保行程管理正常运行，从而改善您的驾驶行为？")
+				.setTitle("通知使用权")
+				.setCancelable(true)
+				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						activity.startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+					}
+				})
+				.setNegativeButton(android.R.string.cancel, null)
+				.create().show();
+	}
+}
 ```
 - 调用样例
 
@@ -126,20 +126,20 @@
 ```
 ####自动开启行程：
 ```java
-        OKDriveConfig config = new OKDriveConfig();
-        config.setApp_key("请替换此处");
-        config.setAuto_drive(true);
-        config.setUser_id("请替换此处");
-        final OKDriveSDK okDriveSDK = OKDriveSDK.getInstance(getApplicationContext());
-        okDriveSDK.setup(config, new CallBack() {
-            @Override
-            public void onSuccess() {
-            }
+    OKDriveConfig config = new OKDriveConfig();
+    config.setApp_key("请替换此处");
+    config.setAuto_drive(true);
+    config.setUser_id("请替换此处");
+    final OKDriveSDK okDriveSDK = OKDriveSDK.getInstance(getApplicationContext());
+    okDriveSDK.setup(config, new CallBack() {
+        @Override
+        public void onSuccess() {
+        }
 
-            @Override
-            public void onFail(String s) {
-            }
-        });
+        @Override
+        public void onFail(String s) {
+        }
+    });
 ```
 # <a id="Examples"></a>【注意事项】
 - 集成SDK后会在后台运行并跟踪您的驾驶行为，可能会显著增加电量消耗，因此我们建议您在夜间或非开车时间对手机充电
