@@ -1,7 +1,6 @@
 # OKDriveSDK_Android
 - 复制libs下所有jar包到项目libs下
 - 复制jniLibs下所有文件到项目src/main/jniLibs下
-- 复制assets下icudt46l.zip到项目assets下
 - 配置以下权限
 ```java
 <uses-permission android:name="android.permission.INTERNET" />
@@ -16,27 +15,44 @@
 <uses-permission android:name="android.permission.BROADCAST_STICKY" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 ```
 - 复制以下内容到配置文件
 ```java
-		<service android:name="com.okdrive.others.DriverService">
-            <intent-filter android:priority="1000">
-                <action android:name="com.okdrive.others.DriverService" />
+		<service
+            android:name="com.okdrive.daemon.NotificationMonitor"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService"/>
             </intent-filter>
         </service>
-        <service android:name="com.okdrive.hand.HandDriverService">
-            <intent-filter android:priority="1000">
-                <action android:name="com.okdrive.hand.HandDriverService" />
-            </intent-filter>
-        </service>
-        <service android:name="com.okdrive.others.UploadDriverDataService">
-            <intent-filter android:priority="1000">
-                <action android:name="com.okdrive.others.UploadDriverDataService" />
-            </intent-filter>
-        </service>
+        <service android:name="com.okdrive.daemon.DaemonService"/>
+        <service android:name="com.okdrive.others.DriverService"/>
+        <service android:name="com.okdrive.others.GrayInnerService"/>
+        <service android:name="com.okdrive.others.UploadDriverDataService"/>
+
         <receiver android:name="com.okdrive.others.WifiReceiver">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.okdrive.others.PhoneStatusReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.okdrive.others.AlarmService"/>
+
+        <receiver android:name="com.okdrive.others.AlarmReceiver"/>
+
+        <service android:name="com.okdrive.others.UploadAlarmService"/>
+
+        <receiver android:name="com.okdrive.others.UploadAlarmReceiver"/>
+        <receiver android:name="com.okdrive.others.PhoneReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
             </intent-filter>
         </receiver>
 ```
