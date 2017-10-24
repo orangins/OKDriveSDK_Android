@@ -95,7 +95,7 @@ public static void checkNotify(final Activity activity) {
 ```
 - 调用样例
 
-####手动开启行程：
+####手动开启行程：手动开启功能暂时关闭
 ```java
        CheckBox cb = new CheckBox(this);
        OKDriveConfig config = new OKDriveConfig();
