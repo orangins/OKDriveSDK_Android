@@ -56,6 +56,43 @@
             </intent-filter>
         </receiver>
 ```
+- 开启守护
+
+####复制以下内容
+```java
+		private static boolean isEnabled(Activity activity) {
+			String pkgName = activity.getPackageName();
+			final String flat = Settings.Secure.getString(activity.getContentResolver(), "enabled_notification_listeners");
+			if (!TextUtils.isEmpty(flat)) {
+				final String[] names = flat.split(":");
+				for (int i = 0; i < names.length; i++) {
+					final ComponentName cn = ComponentName.unflattenFromString(names[i]);
+					if (cn != null) {
+						if (TextUtils.equals(pkgName, cn.getPackageName())) {
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+
+		public static void checkNotify(final Activity activity) {
+			if (!isEnabled(activity) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+				new AlertDialog.Builder(activity)
+						.setMessage("是否开启通知使用权，确保行程管理正常运行，从而改善您的驾驶行为？")
+						.setTitle("通知使用权")
+						.setCancelable(true)
+						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								activity.startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+							}
+						})
+						.setNegativeButton(android.R.string.cancel, null)
+						.create().show();
+			}
+		}
+```
 - 调用样例
 
 ####手动开启行程：
