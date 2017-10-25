@@ -56,6 +56,14 @@
     </intent-filter>
 </receiver>
 ```
+- build.gradle配置
+```java
+	android {
+		sourceSets.main {
+			jniLibs.srcDir 'jniLibs'
+		}
+	}
+```
 - 开启守护
 
 ####复制以下内容
