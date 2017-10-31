@@ -57,6 +57,7 @@
 </receiver>
 ```
 - 获取行程状态
+
 ####复制以下内容
 ```java
 OKDriveSDK.getInstance(this).getDriverStatus(new ICallBack1MWithObject() {
