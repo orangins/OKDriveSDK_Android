@@ -64,6 +64,17 @@
 		}
 	}
 ```
+- 提示
+```java
+如果出现'libsqlcipher.so'驱动文件找不到的问题
+把复制到src/main/jniLibs下的驱动文件放到libs文件夹下
+然后在build.gradle配置
+	sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+```
 - 开启守护
 
 ####复制以下内容
