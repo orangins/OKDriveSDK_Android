@@ -56,24 +56,22 @@
     </intent-filter>
 </receiver>
 ```
-- build.gradle配置
+- 获取行程状态
+####复制以下内容
 ```java
-	android {
-		sourceSets.main {
-			jniLibs.srcDir 'jniLibs'
-		}
-	}
-```
-- 提示
-```java
-如果出现'libsqlcipher.so'驱动文件找不到的问题
-把复制到src/main/jniLibs下的驱动文件放到libs文件夹下
-然后在build.gradle配置
-	sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
+OKDriveSDK.getInstance(this).getDriverStatus(new ICallBack1MWithObject() {
+    @Override
+    public void callBack(Object object) {
+        try {
+            JSONObject jsonObject = new JSONObject(object.toString());
+            long driveStatus = jsonObject.getLong("driveStatus");  //行程状态 -1:行程未开始 1:行程开始 0:行程结束
+			long timestamp = jsonObject.getLong("timestamp");  //行程开启时间 当行程结束后才会返回此参数
+			long timestampEnd = jsonObject.getLong("timestampEnd");  //行程结束时间 同上
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
+});
 ```
 - 开启守护
 
