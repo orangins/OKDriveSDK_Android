@@ -142,7 +142,7 @@ public static void checkNotify(final Activity activity) {
             }
         });
 ```
-####自动开启行程：
+##自动开启行程：
 ```java
     OKDriveConfig config = new OKDriveConfig();
     config.setApp_key("请替换此处");
