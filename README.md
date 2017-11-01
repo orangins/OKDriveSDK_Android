@@ -17,7 +17,7 @@
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 ```
-- 复制以下内容到配置文件
+- 复制以下内容到AndroidManifest.xml
 ```java
 <service
     android:name="com.okdrive.daemon.NotificationMonitor"
@@ -56,9 +56,8 @@
     </intent-filter>
 </receiver>
 ```
-- 获取行程状态
-
-####复制以下内容
+## 获取行程状态
+#### 复制以下内容
 ```java
 OKDriveSDK.getInstance(this).getDriverStatus(new ICallBack1MWithObject() {
     @Override
