@@ -76,7 +76,7 @@ OKDriveSDK.getInstance(this).getDriverStatus(new ICallBack1MWithObject() {
 ```
 - 开启守护
 
-####复制以下内容
+#### 复制以下内容
 ```java
 private static boolean isEnabled(Activity activity) {
 	String pkgName = activity.getPackageName();
@@ -113,7 +113,7 @@ public static void checkNotify(final Activity activity) {
 ```
 - 调用样例
 
-####手动开启行程：
+#### 手动开启行程：
 ```java
        CheckBox cb = new CheckBox(this);
        OKDriveConfig config = new OKDriveConfig();
@@ -142,7 +142,7 @@ public static void checkNotify(final Activity activity) {
             }
         });
 ```
-##自动开启行程：
+#### 自动开启行程：
 ```java
     OKDriveConfig config = new OKDriveConfig();
     config.setApp_key("请替换此处");
