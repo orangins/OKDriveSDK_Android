@@ -50,11 +50,6 @@
 <service android:name="com.okdrive.others.UploadAlarmService"/>
 
 <receiver android:name="com.okdrive.others.UploadAlarmReceiver"/>
-<receiver android:name="com.okdrive.others.PhoneReceiver">
-    <intent-filter>
-        <action android:name="android.intent.action.PHONE_STATE"/>
-    </intent-filter>
-</receiver>
 ```
 
 ## 获取行程状态
