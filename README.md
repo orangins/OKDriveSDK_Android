@@ -144,7 +144,7 @@ public static void checkNotify(final Activity activity) {
     final OKDriveSDK okDriveSDK = OKDriveSDK.getInstance(getApplicationContext());
     okDriveSDK.setup(config, new CallBack() {
         @Override
-        public void onSuccess() {
+        public void onSuccess(OKSetUpResult okSetUpResult) {
         }
 
         @Override
