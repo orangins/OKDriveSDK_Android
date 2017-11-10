@@ -1,6 +1,9 @@
 # OKDriveSDK_Android
-- 复制libs下所有jar包到项目libs下
-- 复制jniLibs下所有文件到项目src/main/jniLibs下
+- 复制OKDriveSDK文件夹下的okdrive.aar包到项目libs下
+## 在build.gradle里添加依赖
+```java
+compile(name: "okdrive", ext: "aar")
+```
 - 配置以下权限
 ```java
 <uses-permission android:name="android.permission.INTERNET" />
@@ -16,40 +19,6 @@
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-```
-- 复制以下内容到AndroidManifest.xml
-```java
-<service
-    android:name="com.okdrive.daemon.NotificationMonitor"
-    android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-    <intent-filter>
-        <action android:name="android.service.notification.NotificationListenerService"/>
-    </intent-filter>
-</service>
-<service android:name="com.okdrive.daemon.DaemonService"/>
-<service android:name="com.okdrive.others.DriverService"/>
-<service android:name="com.okdrive.others.GrayInnerService"/>
-<service android:name="com.okdrive.others.UploadDriverDataService"/>
-
-<receiver android:name="com.okdrive.others.WifiReceiver">
-    <intent-filter>
-        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-    </intent-filter>
-</receiver>
-<receiver android:name="com.okdrive.others.PhoneStatusReceiver">
-    <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"/>
-        <action android:name="android.intent.action.ACTION_SHUTDOWN"/>
-    </intent-filter>
-</receiver>
-
-<service android:name="com.okdrive.others.AlarmService"/>
-
-<receiver android:name="com.okdrive.others.AlarmReceiver"/>
-
-<service android:name="com.okdrive.others.UploadAlarmService"/>
-
-<receiver android:name="com.okdrive.others.UploadAlarmReceiver"/>
 ```
 
 ## 获取行程状态
