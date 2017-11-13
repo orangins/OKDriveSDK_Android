@@ -21,6 +21,7 @@ compile(name: "okdrive", ext: "aar")
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 ```
 - 混淆配置
+```java
 -keep class ch.boye.httpclientandroidlib.** { *; }
 -keep class net.sqlcipher.**{ *; }
 -keep class com.okdrive.**{ *; }
